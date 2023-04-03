@@ -2,6 +2,7 @@ package com.example.taskmanagement.dto;
 
 import com.example.taskmanagement.domain.Role;
 import com.example.taskmanagement.domain.User;
+import com.example.taskmanagement.util.PasswordEncoder;
 
 public class UserAddRequestDto {
     private String username;
@@ -17,6 +18,7 @@ public class UserAddRequestDto {
     }
 
     public User toEntity() {
-        return new User(username, password, email, role);
+        String hashedPassword = PasswordEncoder.encode(password);
+        return new User(username, hashedPassword, email, role);
     }
 }
