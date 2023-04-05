@@ -18,14 +18,10 @@ public class AuthenticationService {
         User user = userService.getUserByEmail(email);
         if (user != null && PasswordEncoder.verify(password, user.getPassword())) {
             // 로그인 성공
-            return new AuthInfo(user.getEmail(), user.getUsername());
+            return new AuthInfo(user.getEmail(), user.getUsername(), user.getRole());
         } else {
             // 로그인 실패
             return null;
         }
-    }
-
-    public void logout() {
-        // 세션 invalidate
     }
 }
