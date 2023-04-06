@@ -6,6 +6,7 @@ public class AuthInfo {
     private String email;
     private String username;
     private Role role;
+
     public AuthInfo(String email, String username, Role role) {
         this.email = email;
         this.username = username;
@@ -19,6 +20,7 @@ public class AuthInfo {
     public String getUsername() {
         return username;
     }
+
     public Role getRole() {
         return role;
     }
