@@ -2,6 +2,7 @@ package com.example.taskmanagement.service;
 
 import com.example.taskmanagement.domain.User;
 import com.example.taskmanagement.dto.AuthInfo;
+import com.example.taskmanagement.dto.UserLoginDto;
 import com.example.taskmanagement.util.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,9 @@ public class AuthenticationService {
         this.userService = userService;
     }
 
-    public AuthInfo login(String email, String password) {
-        User user = userService.getUserByEmail(email);
-        if (user != null && PasswordEncoder.verify(password, user.getPassword())) {
+    public AuthInfo login(UserLoginDto userLoginDto) {
+        User user = userService.getUserByEmail(userLoginDto.getEmail());
+        if (user != null && PasswordEncoder.verify(userLoginDto.getPassword(), user.getPassword())) {
             // 로그인 성공
             return new AuthInfo(user.getEmail(), user.getUsername(), user.getRole());
         } else {

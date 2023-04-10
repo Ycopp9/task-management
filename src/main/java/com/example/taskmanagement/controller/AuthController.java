@@ -1,12 +1,13 @@
 package com.example.taskmanagement.controller;
 
 import com.example.taskmanagement.dto.AuthInfo;
+import com.example.taskmanagement.dto.UserLoginDto;
 import com.example.taskmanagement.service.AuthenticationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,8 @@ public class AuthController {
     }
 
     @PostMapping(path = "/login")
-    public @ResponseBody String login(HttpServletRequest request, @RequestParam String email, @RequestParam String password) {
-        AuthInfo authInfo = authenticationService.login(email, password);
+    public @ResponseBody String login(HttpServletRequest request, @RequestBody UserLoginDto userLoginDto) {
+        AuthInfo authInfo = authenticationService.login(userLoginDto);
         if (authInfo != null) {
             request.getSession().setAttribute("authInfo", authInfo);
             return "Success";
